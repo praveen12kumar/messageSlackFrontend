@@ -1,13 +1,20 @@
 // signup cause some change on server => mutation
 import { useMutation } from '@tanstack/react-query';
+import {toast} from 'react-hot-toast';
 
 import { signInRequest,signUpRequest } from '@/apis/auth';
 
 export const useSignup = () => {
     const {isPending, isSuccess, error, mutate:signupMutation} = useMutation({
         mutationFn:signUpRequest,
-        onSuccess:({data})=>console.log('successfully signed up',data),
-        onError:(error)=>console.log('Failed to signup',error)
+        onSuccess:({data})=>{
+            console.log('successfully signed up',data);
+            toast.success('Successfully signed up');
+        },
+        onError:(error)=>{
+            console.log('Failed to signup',error);
+            toast.error('Failed to signup');
+        }
     });
 
 
