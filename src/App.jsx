@@ -1,16 +1,22 @@
-
 import './App.css';
 
-import { Button } from '@/components/ui/button';
+import {Route,Routes} from 'react-router-dom';
+
+import SigninCard from '@/components/organisms/auth/SigninCard';
+import SignupCard from '@/components/organisms/auth/SignupCard';
+
+import Auth from './pages/auth/Auth';
+
 function App() {
 
 
   return (
     <>
-    <h1 className="text-3xl text-blue-500 font-bold underline">
-      Hello world!
-    </h1>
-      <Button>Button</Button>
+      <Routes>
+        <Route path='/auth/signup' element = {<Auth>{<SignupCard/>}</Auth>} />
+        <Route path='/auth/signin' element ={<Auth><SigninCard/></Auth>}/> 
+
+      </Routes>
     </>
   );
 }
