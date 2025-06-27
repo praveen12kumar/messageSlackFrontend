@@ -1,4 +1,6 @@
-import { useState } from 'react';
+
+import { LucideLoader, TriangleAlert } from 'lucide-react';
+import {FaCheck} from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
 import { Button } from '@/components/ui/button';
@@ -8,31 +10,59 @@ import { Separator } from '@/components/ui/separator';
 
 
 
-const SignupCard = () => {
+const SignupCard = ({
+                    signupForm, 
+                    setSignupForm, 
+                    validationError, 
+                    onSignupFormSubmit,
+                    error,
+                    isPending,
+                    isSuccess
+                
+                }) => {
     const navigate = useNavigate();
-
-    const [signupForm, setSignupForm] = useState({
-        email:'',
-        password:'',
-        confrimPassword:'',
-        username:'',
-    });
 
   return (
     <Card className='w-full h-full'>
         <CardHeader>
             <CardTitle className='text-2xl text-center'>Signup</CardTitle>
             <CardDescription className='text-center'>Sign up to access your account</CardDescription>
+            {
+                validationError && 
+                <div className="text-sm bg-destructive/15 p-4 flex items-center gap-x-2 rounded-md text-destructive text-center mt-6">
+                    <TriangleAlert className='size-4'/>
+                    <p>{validationError.message}</p>
+                </div>
+            }
+
+            {
+                error && 
+                <div className="text-sm bg-destructive/15 p-4 flex items-center gap-x-2 rounded-md text-destructive text-center mt-6">
+                    <TriangleAlert className='size-4'/>
+                    <p>{error.message}</p>
+                </div>
+            }
+
+            {isSuccess && (
+                    <div className="bg-primary/15 rounded-md p-3 flex items-center gap-x-2 text-sm text-primary mb-5">
+                        <FaCheck className='size-5'/>
+                        <p>Successfully signed up</p>
+                        <p>You will be redirected to login shortly</p>
+                        <LucideLoader className='animate-spin ml-2'/>
+                    </div>
+                )
+            }
+
         </CardHeader>
         <CardContent>
-            <form className='space-y-4'>
+            <form className='space-y-4' onSubmit={onSignupFormSubmit}>
                     <Input 
                     type="text" 
                     placeholder="Username" 
                     required
                     value ={signupForm.username}
                     onChange={(e) => setSignupForm({...signupForm, username:e.target.value})}
-                    disabled ={false}
+                    disabled ={isPending}
                     />
 
                     <Input 
@@ -41,7 +71,7 @@ const SignupCard = () => {
                     required
                     value ={signupForm.email}
                     onChange={(e) => setSignupForm({...signupForm, email:e.target.value})}
-                    disabled ={false}
+                    disabled ={isPending}
                     />
 
                     <Input 
@@ -50,7 +80,7 @@ const SignupCard = () => {
                     required
                     value ={signupForm.password}
                     onChange={(e) => setSignupForm({...signupForm, password:e.target.value})}
-                    disabled ={false}
+                    disabled ={isPending}
                     />
 
                     <Input 
@@ -59,12 +89,12 @@ const SignupCard = () => {
                     required
                     value ={signupForm.confrimPassword}
                     onChange={(e) => setSignupForm({...signupForm, confrimPassword:e.target.value})}
-                    disabled ={false}
+                    disabled ={isPending}
                     />
 
                     <Button 
                         type="submit" 
-                        disabled={false}
+                        disabled={isPending}
                         size="lg"
                         className='w-full'
                     >Continue</Button>

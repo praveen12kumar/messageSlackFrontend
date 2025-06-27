@@ -19,7 +19,7 @@ export const useSignup = () => {
     };
 };
 export const useSignin = () => {
-    const {isPending, isSuccess, error, mutate:signinMutation} = useMutation({
+    const {isPending, isSuccess, error, mutateAsync:signinMutation} = useMutation({
         mutationFn:signInRequest,
         onSuccess:({data})=>console.log('successfully signed in',data),
         onError:(error)=>console.log('Failed to sign in',error)
