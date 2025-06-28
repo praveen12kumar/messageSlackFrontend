@@ -27,9 +27,15 @@ const [validationError, setValidationError] = useState(null);
             return;
         }
 
-        if(!validateEmail(signinForm.email) || !validatePassword(signinForm.password)){
-            console.log('Invalid email or password');
-            setValidationError({message:'Invalid email or password'});
+       if(!validateEmail(signinForm.email)){
+            console.log('Invalid email format');
+            setValidationError({message:'Invalid email format'});
+            return;
+        }
+
+        if(!validatePassword(signinForm.password)){
+            console.log('Invalid password format');
+            setValidationError({message:'Min 8 chars: A-Z, a-z, 0-9, special (!@#...).'});
             return;
         }
 

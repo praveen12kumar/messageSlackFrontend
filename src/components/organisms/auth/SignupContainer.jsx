@@ -28,9 +28,21 @@ const SignupContainer = () => {
             return;
         }
 
-        if(!validateEmail(signupForm.email) || !validatePassword(signupForm.password) || !validateUsername(signupForm.username)){
-            console.log('Invalid email or password or username');
-            setValidationError({message:'Invalid email or password or username'});
+        if(!validateEmail(signupForm.email)){
+            console.log('Invalid email format');
+            setValidationError({message:'Invalid email format'});
+            return;
+        }
+
+        if(!validatePassword(signupForm.password)){
+            console.log('Invalid password format');
+            setValidationError({message:'Min 8 chars: A-Z, a-z, 0-9, special (!@#...).'});
+            return;
+        }
+
+        if(!validateUsername(signupForm.username)){
+            console.log('Invalid username format');
+            setValidationError({message:'Username must have 4 or more characters.'});
             return;
         }
 

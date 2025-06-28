@@ -7,8 +7,8 @@ import {signUpRequest } from '@/apis/auth';
 export const useSignup = () => {
     const {isPending, isSuccess, error, mutateAsync:signupMutation} = useMutation({
         mutationFn:signUpRequest,
-        onSuccess:({data})=>{
-            console.log('successfully signed up',data);
+        onSuccess:(response)=>{
+            console.log('successfully signed up', response.data);
             toast.success('Successfully signed up');
         },
         onError:(error)=>{

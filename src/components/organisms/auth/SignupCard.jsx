@@ -29,7 +29,7 @@ const SignupCard = ({
             <CardDescription className='text-center'>Sign up to access your account</CardDescription>
             {
                 validationError && 
-                <div className="text-sm bg-destructive/15 p-4 flex items-center gap-x-2 rounded-md text-destructive text-center mt-6">
+                <div className="text-sm bg-destructive/15 p-4 flex items-center justify-center gap-x-2 rounded-md text-destructive text-center mt-6">
                     <TriangleAlert className='size-4'/>
                     <p>{validationError.message}</p>
                 </div>
@@ -37,7 +37,7 @@ const SignupCard = ({
 
             {
                 error && 
-                <div className="text-sm bg-destructive/15 p-4 flex items-center gap-x-2 rounded-md text-destructive text-center mt-6">
+                <div className="text-sm bg-destructive/15 p-4 flex items-center justify-center gap-x-2 rounded-md text-destructive text-center mt-6">
                     <TriangleAlert className='size-4'/>
                     <p>{error.message}</p>
                 </div>
