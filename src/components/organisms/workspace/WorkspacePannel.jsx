@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import { useFetchWorkspaceDetailsById } from '@/hooks/apis/workspaces/useFetchWorkspaceDetailsById';
 
-import WorkspacePannelHeader from './WorkspacePannelHeader';
+import WorkspacePannelHeader from '../../molecules/workspace/WorkspacePannelHeader';
 
 const WorkspacePannel = () => {
     const {workspaceId} = useParams();

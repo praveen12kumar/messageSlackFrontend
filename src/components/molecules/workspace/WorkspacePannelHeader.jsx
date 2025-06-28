@@ -5,16 +5,19 @@ import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem,DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { DropdownMenuSeparator } from '@/components/ui/dropdown-menu';
 import { useAuth } from '@/hooks/context/useAuth';
+import { useWorkspacePreferencesModal } from '@/hooks/context/useWorkspacePreferencesModal';
 
 
 const WorkspacePannelHeader = ({workspace}) => {
 
     const workspacemembers = workspace?.members;
 
+    const {setOpenPreferensesModal} = useWorkspacePreferencesModal();
+
     const {auth} = useAuth();
-    console.log(auth);
+    //console.log(auth);
     const isLoggedUserAdminOfWorkspace = workspacemembers?.find(member => member?.memberId === auth?.user?._id && member?.role === 'admin');
-    console.log(isLoggedUserAdminOfWorkspace);
+    //console.log(isLoggedUserAdminOfWorkspace);
   return (
     <div className="flex items-center justify-evenly px-4 h-14 gap-1">
         <DropdownMenu>
@@ -41,7 +44,8 @@ const WorkspacePannelHeader = ({workspace}) => {
                     isLoggedUserAdminOfWorkspace &&
                     <>
                     <DropdownMenuItem className='cursor-pointer py-2'
-                        >
+                        onClick={()=> setOpenPreferensesModal(true)}
+                    >
                             Preferences
                     </DropdownMenuItem>
                     
