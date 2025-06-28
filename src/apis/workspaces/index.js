@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '@/config/axiosConfig';
 
 
 export const createWorkspaceRequest = async({name, description, token})=>{
@@ -9,9 +9,7 @@ export const createWorkspaceRequest = async({name, description, token})=>{
                 'x-access-token' : token
             }
         });
-
-        console.log('workspace created', response);
-        return response?.data;
+        return response?.data?.data;
 
     } catch (error) {
         console.log('Error in creating workspace', error);
@@ -28,9 +26,7 @@ export const fetchWorkspacesRequest = async({token})=>{
                 'x-access-token' : token
             }
         });
-
-        console.log('workspace fetched', response);
-        return response?.data;
+        return response?.data?.data;
 
     } catch (error) {
         console.log('Error in fetching workspace', error);

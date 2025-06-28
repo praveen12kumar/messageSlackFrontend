@@ -21,7 +21,6 @@ export const useSignin = () => {
                 token: response.data.token
             });
 
-
             toast.success('Successfully signed in');
         },
         onError:(error)=>{
