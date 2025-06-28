@@ -9,6 +9,7 @@ import NotFound from '@/pages/notFound/NotFound';
 
 import SigninContainer from './components/organisms/auth/SigninContainer';
 import SignupContainer from './components/organisms/auth/SignupContainer';
+import { AppContextProvider } from './context/AppContextProvider';
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
   return (
     <>
     <QueryClientProvider client={queryClient}>
+      <AppContextProvider>
       <Routes>
         <Route path='/auth/signup' element = {<Auth>{<SignupContainer/>}</Auth>} />
         <Route path='/auth/signin' element ={<Auth><SigninContainer/></Auth>}/> 
@@ -24,6 +26,7 @@ function App() {
 
         <Route path='/*' element={<NotFound/>}/>
       </Routes>
+      </AppContextProvider>
       </QueryClientProvider>
     </>
   );
