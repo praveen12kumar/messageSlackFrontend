@@ -21,7 +21,7 @@ const ProtectedRoute = ({children}) => {
     if(!auth.user || !auth.token){
        return <Navigate to='/auth/signin'/>;
     }
-
+    
   return children;
 };
 
