@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button';
 
 
 const SidebarButton = ({
-    Icon, label, isActive
+    Icon, label, 
 }) => {
   return (
     <div className='w-full flex flex-col items-center justify-center cursor-pointer'>
