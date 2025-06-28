@@ -1,8 +1,7 @@
 import { createContext, useEffect, useState } from 'react';
 
 
-const AuthContext = createContext({});
-
+const AuthContext = createContext();
 
 // pass component as children
 // use children props
@@ -11,7 +10,8 @@ export const AuthContextProvider = ({children})=>{
 
     const [auth, setAuth] = useState({
         user: null,
-        token: null
+        token: null,
+        isLoading: true,
     });
 
     useEffect(()=>{
@@ -21,6 +21,7 @@ export const AuthContextProvider = ({children})=>{
             setAuth({
                 user: JSON.parse(user),
                 token,
+                isLoading: false
             });
         }
     },[]);
