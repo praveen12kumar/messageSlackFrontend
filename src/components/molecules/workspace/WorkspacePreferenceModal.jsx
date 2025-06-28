@@ -9,7 +9,7 @@ import { useWorkspacePreferencesModal } from '@/hooks/context/useWorkspacePrefer
 const WorkspacePreferenceModal = () => {
     
     const {initialValue, openPreferencesModal, setOpenPreferensesModal} = useWorkspacePreferencesModal();
-    console.log('initialValue', initialValue);
+    
 
     function handleClose() {
         setOpenPreferensesModal(false);
@@ -30,6 +30,7 @@ const WorkspacePreferenceModal = () => {
                         <p className='font-semibold text-sm'>Workspace Name</p>
                         <p className='font-semibold text-sm hover:underline'>Edit</p>
                     </div>
+                    <p className='text-sm text-muted-foreground'>{initialValue}</p>
                 </div>
                 <Button className='flex items-center gap-x-2 px-5 py-4  rounded-lg'>
                     <TrashIcon className='size-4 mr-2'/>
