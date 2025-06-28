@@ -9,6 +9,6 @@ import App from './App.jsx';
 createRoot(document.getElementById('root')).render(
   <Router>
     <App />
-    <Toaster />
+    <Toaster position="bottom-right" />
   </Router>
 );

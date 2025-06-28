@@ -44,10 +44,9 @@ const SignupCard = ({
             }
 
             {isSuccess && (
-                    <div className="bg-primary/15 rounded-md p-3 flex items-center gap-x-2 text-sm text-primary mb-5">
+                    <div className="bg-primary/15 rounded-md p-4 flex items-center justify-center gap-x-2 text-sm text-primary mb-5">
                         <FaCheck className='size-5'/>
-                        <p>Successfully signed up</p>
-                        <p>You will be redirected to login shortly</p>
+                        <p>Successfully signed up, redirecting to login</p>
                         <LucideLoader className='animate-spin ml-2'/>
                     </div>
                 )

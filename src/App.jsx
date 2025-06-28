@@ -1,6 +1,7 @@
 import './App.css';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Home } from 'lucide-react';
 import {Route,Routes} from 'react-router-dom';
 
 import Auth from '@/pages/auth/Auth';
@@ -19,6 +20,8 @@ function App() {
       <Routes>
         <Route path='/auth/signup' element = {<Auth>{<SignupContainer/>}</Auth>} />
         <Route path='/auth/signin' element ={<Auth><SigninContainer/></Auth>}/> 
+        <Route path='/' element={<Home/>}/>
+
         <Route path='/*' element={<NotFound/>}/>
       </Routes>
       </QueryClientProvider>
