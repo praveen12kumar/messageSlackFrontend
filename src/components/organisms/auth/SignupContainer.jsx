@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useSignup } from '@/hooks/apis/auth/useSignup';
+import { validateEmail, validatePassword, validateUsername } from '@/utils/validate';
 
 import SignupCard from './SignupCard';
-
 const SignupContainer = () => {
     const navigate = useNavigate();
     const [signupForm, setSignupForm] = useState({
@@ -25,6 +25,12 @@ const SignupContainer = () => {
         if(!signupForm.email || !signupForm.password || !signupForm.confrimPassword || !signupForm.username){
             console.log('Please fill all the fields');
             setValidationError({message:'Please fill all the fields'});
+            return;
+        }
+
+        if(!validateEmail(signupForm.email) || !validatePassword(signupForm.password) || !validateUsername(signupForm.username)){
+            console.log('Invalid email or password or username');
+            setValidationError({message:'Invalid email or password or username'});
             return;
         }
 

@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useSignin } from '@/hooks/apis/auth/useSignin';
+import { validateEmail, validatePassword } from '@/utils/validate';
 
 import SigninCard from './SigninCard';
-
 
 const SigninContainer = () => {
   const navigate = useNavigate();
@@ -24,6 +24,12 @@ const [validationError, setValidationError] = useState(null);
         if(!signinForm.email || !signinForm.password){
             console.log('Please fill all the fields');
             setValidationError({message:'Please fill all the fields'});
+            return;
+        }
+
+        if(!validateEmail(signinForm.email) || !validatePassword(signinForm.password)){
+            console.log('Invalid email or password');
+            setValidationError({message:'Invalid email or password'});
             return;
         }
 
