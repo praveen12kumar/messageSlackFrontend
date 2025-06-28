@@ -7,6 +7,7 @@ import Home from '@/pages/home/Home';
 import NotFound from '@/pages/notFound/NotFound';
 
 import ProtectedRoute from './components/molecules/ProtectedRoute';
+import WorkspaceLayout from './pages/workspace/Layout';
 
 export const AppRoutes = ()=>{
 
@@ -16,6 +17,8 @@ export const AppRoutes = ()=>{
         <Route path='/auth/signup' element = {<Auth>{<SignupContainer/>}</Auth>} />
         <Route path='/auth/signin' element ={<Auth><SigninContainer/></Auth>}/> 
         <Route path='/' element={<ProtectedRoute><Home/></ProtectedRoute>}/>
+
+        <Route path='/workspaces/:workspaceId' element={<ProtectedRoute><WorkspaceLayout>Workspace</WorkspaceLayout></ProtectedRoute>}/>
 
         <Route path='/*' element={<NotFound/>}/>
       </Routes>
