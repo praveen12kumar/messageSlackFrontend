@@ -24,7 +24,7 @@ const CreateWorkspaceModal = () => {
             e.preventDefault();
             try {
                 const data = await createWorkspaceMutation({name: workspaceName});
-                console.log('created workspace', data);
+                //console.log('created workspace', data);
                 navigate(`/workspaces/${data?._id}`);
 
             } catch (error) {
