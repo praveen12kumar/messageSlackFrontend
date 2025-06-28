@@ -52,7 +52,7 @@ const [validationError, setValidationError] = useState(null);
         setSigninForm({email:'', password:''});
         setTimeout(()=>{
           navigate('/');
-        }, 2000);
+        }, 1000);
       }
     },[isSuccess, navigate]);
 

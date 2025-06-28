@@ -65,7 +65,7 @@ const SignupContainer = () => {
         if(isSuccess){
            setTimeout(() => {
                 navigate('/auth/signin');
-           }, 2000);
+           }, 1000);
 
            setSignupForm({
                 email:'',
