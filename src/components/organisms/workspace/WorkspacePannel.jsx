@@ -10,7 +10,6 @@ const WorkspacePannel = () => {
 
     const {isFetching, isSuccess, workspace} = useFetchWorkspaceDetailsById(workspaceId);
 
-
     if(isFetching){
         return (
             <div className='h-full flex flex-col gap-y-2 items-center justify-center text-white text-xl'>
