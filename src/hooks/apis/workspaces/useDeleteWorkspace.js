@@ -4,7 +4,7 @@ import { deleteWorkspaceRequest } from '@/apis/workspaces';
 import { useAuth } from '@/hooks/context/useAuth';
 
 export const useDeleteWorkspace = (workspaceId) => {
-    console.log('delete workspaceId', workspaceId);
+    //console.log('delete workspaceId', workspaceId);
     const { auth } = useAuth();
     const {isPending, isSuccess, error, mutateAsync: deleteWorkspaceMutation} = useMutation({
         mutationFn: () => deleteWorkspaceRequest({ workspaceId, token: auth?.token}),
