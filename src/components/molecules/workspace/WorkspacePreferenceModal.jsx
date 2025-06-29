@@ -41,6 +41,11 @@ const WorkspacePreferenceModal = () => {
     message:'This action cannot be undone',
   });
 
+  const {confirmation:updateConfirmation, ConfirmDialog: UpdateDialog} = useConfirm({
+    title: 'Do you want to update the workspace?',
+    message:'This action cannot be undone',
+  });
+
   const [renameValue, setRenameValue] = useState(workspace?.name);
 
   const { deleteWorkspaceMutation } = useDeleteWorkspace(workspaceId);
@@ -72,6 +77,8 @@ const WorkspacePreferenceModal = () => {
   async function handleFormSubmit(e) {
     e.preventDefault();
     try {
+      const ok = await updateConfirmation();
+      if(!ok) return;
       await updateWorkspaceMutation(renameValue);
       queryClient.invalidateQueries(`fetchWorkspaceDetailsById-${workspaceId}`);
       setOpenPreferensesModal(false);
@@ -85,6 +92,7 @@ const WorkspacePreferenceModal = () => {
   return (
     <>
       <ConfirmDialog />
+      <UpdateDialog/>
       <Dialog open={openPreferencesModal} onOpenChange={handleClose}>
         <DialogContent className="p-0 bg-gray-100 overflow-hidden">
           <DialogHeader className="gb-gray-800 p-4 border-b bg-white ">

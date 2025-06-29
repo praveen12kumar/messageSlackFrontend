@@ -47,7 +47,6 @@ export const useConfirm = ({
                             Cancel
                         </Button>
                         <Button
-                            variant="primary"
                             onClick={handleConfirm}
                         >
                             Confirm
