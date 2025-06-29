@@ -1,28 +1,19 @@
 
-import { useQueryClient } from '@tanstack/react-query';
+//import { useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
-import { useAddChannelToWorkspace } from '@/hooks/apis/workspaces/useAddChannelToWorkspace';
-import { useCreateChannelModal } from '@/hooks/context/useCreateChannelModal';
-import { useCurrentWorkspace } from '@/hooks/context/useCurrentWorkspace';
-import { useToast } from '@/hooks/use-toast';
+import { useCreateChannelModal } from '@/hooks/context/useCreateChannelModal ';
+
+
 
 export const CreateChannelModal = () => {
-
-    const { toast } = useToast();
-
-    const queryClient = useQueryClient();
-    
+ 
     const {openCreateChannelModal, setOpenCreateChannelModal} = useCreateChannelModal();
 
     const [channelName, setChannelName] = useState('');
-
-    const { addChannelToWorkspaceMutation } = useAddChannelToWorkspace();
-
-    const {currentWorkspace} = useCurrentWorkspace();
 
     function handleClose() {
         setOpenCreateChannelModal(false);
@@ -30,19 +21,6 @@ export const CreateChannelModal = () => {
 
     async function handleFormSubmit(e) {
         e.preventDefault();
-        await addChannelToWorkspaceMutation({
-            workspaceId: currentWorkspace?._id,
-            channelName: channelName
-        });
-
-        toast({
-            type: 'success',
-            title: 'Channel created successfully'
-        });
-
-        queryClient.invalidateQueries(`fetchWorkspaceById-${currentWorkspace?._id}`);
-
-        handleClose();
     }
 
     return (
@@ -71,7 +49,6 @@ export const CreateChannelModal = () => {
                     </div>
                 </form>
             </DialogContent>
-            
         </Dialog>
     );
 };

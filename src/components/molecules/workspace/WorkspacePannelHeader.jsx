@@ -10,7 +10,7 @@ import { useWorkspacePreferencesModal } from '@/hooks/context/useWorkspacePrefer
 
 
 const WorkspacePannelHeader = ({workspace}) => {
-    console.log('workspace pannel',workspace);
+    
     const workspacemembers = workspace?.members;
 
     const {setOpenPreferensesModal, setInitialValue} = useWorkspacePreferencesModal();

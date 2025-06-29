@@ -6,15 +6,15 @@ import { cn } from '@/lib/utils';
 
 
 const sidebarItemVariants = cva(
-    'flex items-center justify-start gap-1.5 font-normal h-7 px-3 text-sm overflow-hidden',
+    'flex items-center justify-start gap-1.5 font-normal h-8 px-[20px] text-sm overflow-hidden',
     {
-        variants:{
-            variant:{
-                default: 'text-[#9edffcc]',
-                active: 'text-[#481350] bg-white/90 hover:bg-white/80',
+        variants: {
+            variant: {
+                default: 'text-[#f9edffcc]',
+                active: 'text-[#481350] bg-white/90 hover:bg-white/80'
             }
         },
-        defaultVariants:'default'
+        defaultVariants: 'default'
     }
 );
 
@@ -23,7 +23,6 @@ const SidebarItem = ({label,id, icon:Icon, variant}) => {
     const {workspaceId} = useParams();
 
   return (
-
 
     <Button
         variant="transparent"

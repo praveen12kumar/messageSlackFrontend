@@ -13,7 +13,7 @@ const CreateWorkspaceModal = () => {
     const queryClient = useQueryClient();
     
     const {openCreateWorkspaceModal, setOpenCreateWorkspaceModal} = useCreateWorkspaceModal();
-
+    
     const {isPending, createWorkspaceMutation} = useCreateWorkspace();
 
     const [workspaceName, setWorkspaceName] = useState('');

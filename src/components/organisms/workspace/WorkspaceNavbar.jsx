@@ -12,7 +12,7 @@ const WorkspaceNavbar = () => {
     //console.log('workspaceId in Options', workspaceId);
 
     const { workspace} = useFetchWorkspaceDetailsById(workspaceId);
-    console.log('new WOrkspace', workspace);
+    
     // if(isFetching){
     //     return <LucideLoader className='animate-spin ml-2'/>;
     // }

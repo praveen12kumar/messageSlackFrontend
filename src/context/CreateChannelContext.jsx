@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { createContext } from 'react';
+import { createContext, useState } from 'react';
 
 const CreateChannelContext = createContext();
 
@@ -16,7 +15,5 @@ export const CreateChannelContextProvider = ({children}) => {
         </CreateChannelContext.Provider>
     );
 };
-
-
 
 export default CreateChannelContext;
