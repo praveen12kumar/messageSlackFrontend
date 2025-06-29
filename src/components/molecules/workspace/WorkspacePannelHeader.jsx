@@ -10,7 +10,7 @@ import { useWorkspacePreferencesModal } from '@/hooks/context/useWorkspacePrefer
 
 
 const WorkspacePannelHeader = ({workspace}) => {
-
+    console.log('workspace pannel',workspace);
     const workspacemembers = workspace?.members;
 
     const {setOpenPreferensesModal, setInitialValue} = useWorkspacePreferencesModal();
@@ -20,7 +20,7 @@ const WorkspacePannelHeader = ({workspace}) => {
 
     const {auth} = useAuth();
     //console.log(auth);
-    const isLoggedUserAdminOfWorkspace = workspacemembers?.find(member => member?.memberId === auth?.user?._id && member?.role === 'admin');
+    const isLoggedUserAdminOfWorkspace = workspacemembers?.find(member => member?.memberId?._id === auth?.user?._id && member?.role === 'admin');
     //console.log(isLoggedUserAdminOfWorkspace);
   
     useEffect(()=>{
