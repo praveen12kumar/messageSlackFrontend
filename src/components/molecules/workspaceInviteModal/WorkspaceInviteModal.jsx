@@ -3,15 +3,14 @@ import toast from 'react-hot-toast';
 
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { useResetJoinCodeToWorkspace } from '@/hooks/apis/workspaces/useResetJoinCodeToWorkspace';
-
+import { useJoinWorkspaceRequest } from '@/hooks/apis/workspaces/useJoinWorkspace';
 
 export const WorkspaceInviteModal = ({openInviteModal, setOpenInviteModal, workspaceId,  workspaceName, joinCode}) => {
    
-    const {resetJoinCodeMutation} = useResetJoinCodeToWorkspace(workspaceId);
+    const {joinWorkspaceMutation} = useJoinWorkspaceRequest(workspaceId);
 
     async function handleCopy() {
-        const inviteLink = `${window.location.origin}/join/${joinCode}`;
+        const inviteLink = `${joinCode}`;
         console.log(inviteLink);
         await navigator.clipboard.writeText(inviteLink);
         toast.success('Copied to clipboard');
@@ -19,7 +18,7 @@ export const WorkspaceInviteModal = ({openInviteModal, setOpenInviteModal, works
 
     async function handleResetCopy() {
         try {
-            await resetJoinCodeMutation();
+            await joinWorkspaceMutation(joinCode);
             toast.success('Join code reset successfully');
         } catch (error) {
             console.log(error);
@@ -47,9 +46,19 @@ export const WorkspaceInviteModal = ({openInviteModal, setOpenInviteModal, works
                         size='sm'
                         onClick={handleCopy}
                         >
-                        Copy Link
+                        Copy Code
                         <CopyIcon className='size-4 ml-2'/>
                     </Button>
+
+                    {/* Link to redirect the user to a new tab to join page*/}
+                    <a 
+                        href={`/workspaces/join/${workspaceId}`}
+                        target="_blank"
+                        rel="noreferrer"
+                        className='text-blue-800 hover:underline'
+                    >
+                        Redirect to Join page
+                    </a>
                 </div>
 
                 <div className="w-full flex flex-col items-center justify-center p-2 mt-5">
