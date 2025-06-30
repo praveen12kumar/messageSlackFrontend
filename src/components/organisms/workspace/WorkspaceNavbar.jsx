@@ -1,22 +1,29 @@
-
-//import { LucideLoader } from 'lucide-react';
-import { InfoIcon, SearchIcon } from 'lucide-react';
+import { InfoIcon, LucideLoader, SearchIcon } from 'lucide-react';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { Button } from '@/components/ui/button';
 import { useFetchWorkspaceDetailsById } from '@/hooks/apis/workspaces/useFetchWorkspaceDetailsById';
+import { useCurrentWorkspace } from '@/hooks/context/useCurrentWorkspace';
 
 const WorkspaceNavbar = () => {
 
     const {workspaceId} = useParams();
     //console.log('workspaceId in Options', workspaceId);
 
-    const { workspace} = useFetchWorkspaceDetailsById(workspaceId);
-    
-    // if(isFetching){
-    //     return <LucideLoader className='animate-spin ml-2'/>;
-    // }
+    const {isFetching, workspace} = useFetchWorkspaceDetailsById(workspaceId);
 
+    const {setCurrentWorkspace} = useCurrentWorkspace();
+
+    useEffect(()=>{
+        if(workspace){
+            setCurrentWorkspace(workspace);
+        }
+    },[workspace, setCurrentWorkspace]);
+
+    if(isFetching){
+        return <LucideLoader className='animate-spin ml-2'/>;
+    }
 
   return (
     <nav className='flex items-center justify-center h-10 p-1.5 bg-slack-dark'>
