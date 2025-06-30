@@ -39,7 +39,7 @@ const ChannelHeader = ({name}) => {
                             </p>
 
                         </div>
-                        {/* HW implement edit dialog for editting name of a channel */}
+                        {/* //Todo HW implement edit dialog for editting name of a channel */}
                 </div>
             </DialogContent>
         </Dialog>

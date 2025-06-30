@@ -1,28 +1,41 @@
-import { InfoIcon, LucideLoader, SearchIcon } from 'lucide-react';
+import { InfoIcon, SearchIcon } from 'lucide-react';
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
+import Loader from '@/components/atoms/loader/Loader';
 import { Button } from '@/components/ui/button';
 import { useFetchWorkspaceDetailsById } from '@/hooks/apis/workspaces/useFetchWorkspaceDetailsById';
+import { useAuth } from '@/hooks/context/useAuth';
 import { useCurrentWorkspace } from '@/hooks/context/useCurrentWorkspace';
 
 const WorkspaceNavbar = () => {
+    const navigate = useNavigate();
+    const {logout} = useAuth();
 
     const {workspaceId} = useParams();
     //console.log('workspaceId in Options', workspaceId);
 
-    const {isFetching, workspace} = useFetchWorkspaceDetailsById(workspaceId);
+    const {isFetching, workspace, error, isSuccess} = useFetchWorkspaceDetailsById(workspaceId);
 
     const {setCurrentWorkspace} = useCurrentWorkspace();
 
     useEffect(()=>{
+
+        if(!isFetching && !isSuccess && error){
+            console.log(`Error in fetching workspace details, message: ${error?.message} statue: ${error?.status}`);
+            if(error?.status === 403){
+                logout();
+                navigate('/auth/signin');
+            }
+        }
+
         if(workspace){
             setCurrentWorkspace(workspace);
         }
-    },[workspace, setCurrentWorkspace]);
+    },[workspace, setCurrentWorkspace, isFetching, isSuccess, error, logout, navigate]);
 
     if(isFetching){
-        return <LucideLoader className='animate-spin ml-2'/>;
+        return <Loader/>;
     }
 
   return (
