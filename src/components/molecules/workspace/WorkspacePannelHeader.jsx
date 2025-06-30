@@ -1,12 +1,14 @@
 
 import { ChevronDown, ListFilterIcon, SquarePenIcon } from 'lucide-react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem,DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { DropdownMenuSeparator } from '@/components/ui/dropdown-menu';
 import { useAuth } from '@/hooks/context/useAuth';
 import { useWorkspacePreferencesModal } from '@/hooks/context/useWorkspacePreferencesModal';
+
+import { WorkspaceInviteModal } from '../workspaceInviteModal/WorkspaceInviteModal';
 
 
 const WorkspacePannelHeader = ({workspace}) => {
@@ -17,6 +19,7 @@ const WorkspacePannelHeader = ({workspace}) => {
 
     const {setWorkspace} = useWorkspacePreferencesModal();
 
+    const [openInviteModal, setOpenInviteModal] = useState(false);
 
     const {auth} = useAuth();
     //console.log(auth);
@@ -29,6 +32,15 @@ const WorkspacePannelHeader = ({workspace}) => {
   
   
     return (
+    <>
+    <WorkspaceInviteModal
+        openInviteModal={openInviteModal}
+        setOpenInviteModal={setOpenInviteModal}
+        workspaceId={workspace?._id}
+        workspaceName={workspace?.name}
+        joinCode={workspace?.joinCode}
+    
+    />
     <div className="flex items-center justify-evenly px-4 h-14 gap-1">
         <DropdownMenu>
             <DropdownMenuTrigger>
@@ -64,7 +76,9 @@ const WorkspacePannelHeader = ({workspace}) => {
                     
                     <DropdownMenuSeparator/>
 
-                    <DropdownMenuItem className='cursor-pointer py-2'>
+                    <DropdownMenuItem 
+                        onClick={()=>setOpenInviteModal(true)} 
+                     className='cursor-pointer py-2'>
                         Invite people to {workspace?.name}
                     </DropdownMenuItem>
                     </>
@@ -80,6 +94,7 @@ const WorkspacePannelHeader = ({workspace}) => {
             </div>
         </DropdownMenu>
     </div>
+    </>
   );
 };
 
