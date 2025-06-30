@@ -9,7 +9,7 @@ export const getChannelById = async({channelId, token})=>{
             }
         });
 
-        console.log('channel details', response);
+        //console.log('channel details', response);
 
         return response?.data?.data;
 

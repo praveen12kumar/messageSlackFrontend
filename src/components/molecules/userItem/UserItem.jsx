@@ -26,7 +26,7 @@ export const UserItem = ({
     image,
     variant
 }) => {
-    console.log('incoming label', label);
+    
     const { workspace } = useCurrentWorkspace();
 
     return (

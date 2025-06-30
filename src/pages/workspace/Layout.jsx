@@ -22,8 +22,6 @@ const WorkspaceLayout = ({children}) => {
               </ResizablePanel>
               
             </ResizablePanelGroup>
-
-            {children}
         </div>    
     </div>
   );

@@ -3,6 +3,7 @@ import 'quill/dist/quill.core.css';
 import { ImageIcon } from 'lucide-react';
 import Quill from 'quill';
 import { useEffect, useRef, useState } from 'react';
+import { MdSend } from 'react-icons/md';
 import {PiTextAa} from 'react-icons/pi';
 
 import { Button } from '@/components/ui/button';
@@ -11,7 +12,7 @@ import Hint from '../hint/Hint';
 
 export const Editor = ({
     //variant = 'create',
-    // onSubmit,
+    onSubmit,
     //onCancel,
     //placeholder,
     //disabled,
@@ -29,10 +30,10 @@ export const Editor = ({
 
     function toggleToolbar() {
         setIsToolbarVisible(!isToolbarVisible);
-        // const toolbar = containerRef.current.querySelector('.ql-toolbar');
-        // if(toolbar) {
-        //     toolbar.classList.toggle('hidden');
-        // }
+        const toolbar = containerRef.current.querySelector('.ql-toolbar');
+        if(toolbar) {
+            toolbar.classList.toggle('hidden');
+        }
     }
 
 
@@ -90,6 +91,7 @@ export const Editor = ({
             <div className='flex flex-col border border-slate-300 rounded-md overflow-hidden focus-within:shadow-sm focus-within:border-slate-400 bg-white transition focus-within:'>
 
                 <div className='h-full ql-custom' ref={containerRef} />
+                
                 <div className="flex px-2 pb-2 z-[5]">
                     <Hint 
                         label={isToolbarVisible ? 'Show toolbar' : 'Hide toolbar'}
@@ -97,7 +99,7 @@ export const Editor = ({
                         align='center'
                     >
                     <Button
-                        size='iconsm'
+                        size='sm'
                         variant='ghost'
                         disabled={false}
                         onClick={toggleToolbar}    
@@ -110,7 +112,7 @@ export const Editor = ({
                         label='Image'
                     >
                     <Button
-                        size='iconSm'
+                        size='Sm'
                         variant='ghost'
                         disabled={false}
                         onClick={()=>{}}    
@@ -118,8 +120,27 @@ export const Editor = ({
                         <ImageIcon className='size-5' />
                     </Button>
                     </Hint>
+
+                    <Hint 
+                        label='Send Message'
+                    >
+                    <Button
+                        size='sm'
+                        className='ml-auto bg-[#007a6a] hover:bg-[#007a6a]/80 text-white transition-colors ease-in duration-200'
+                        onClick={()=>{
+                            onSubmit({body: JSON.stringify(quillRef?.current?.getContents())});
+                        }}
+                    >
+                        <MdSend className='size-5' />
+                    </Button>
+                    </Hint>
+
+
                 </div>
             </div>
+            <p className="p-2 text-xs text-muted-foreground flex justify-end">
+                <strong>Shift + Enter </strong> &nbsp; to add a new line
+            </p>
 
         </div>
     );
