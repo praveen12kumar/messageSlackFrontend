@@ -11,7 +11,7 @@ import Hint from '../hint/Hint';
 
 export const Editor = ({
     //variant = 'create',
-    onSubmit,
+    // onSubmit,
     //onCancel,
     //placeholder,
     //disabled,
