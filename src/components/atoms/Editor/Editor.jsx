@@ -1,7 +1,13 @@
 import 'quill/dist/quill.core.css';
 
+import { ImageIcon } from 'lucide-react';
 import Quill from 'quill';
 import { useEffect, useRef, useState } from 'react';
+import {PiTextAa} from 'react-icons/pi';
+
+import { Button } from '@/components/ui/button';
+
+import Hint from '../hint/Hint';
 
 export const Editor = ({
     //variant = 'create',
@@ -19,6 +25,16 @@ export const Editor = ({
     const defaultValueRef = useRef();
     const quillRef = useRef();
     const placeholderRef = useRef();
+
+
+    function toggleToolbar() {
+        setIsToolbarVisible(!isToolbarVisible);
+        // const toolbar = containerRef.current.querySelector('.ql-toolbar');
+        // if(toolbar) {
+        //     toolbar.classList.toggle('hidden');
+        // }
+    }
+
 
     useEffect(() => {
 
@@ -69,14 +85,40 @@ export const Editor = ({
 
 
     return (
-        <div
-            className='flex flex-col'
-        >
+        <div className='flex flex-col'>
 
-            <div
-                className='flex flex-col border border-slate-300 rounded-md overflow-hidden focus-within:shadow-sm focus-within:border-slate-400 bg-white transition focus-within:'
-            >
-                <div ref={containerRef} />
+            <div className='flex flex-col border border-slate-300 rounded-md overflow-hidden focus-within:shadow-sm focus-within:border-slate-400 bg-white transition focus-within:'>
+
+                <div className='h-full ql-custom' ref={containerRef} />
+                <div className="flex px-2 pb-2 z-[5]">
+                    <Hint 
+                        label={isToolbarVisible ? 'Show toolbar' : 'Hide toolbar'}
+                        side='bottom'
+                        align='center'
+                    >
+                    <Button
+                        size='iconsm'
+                        variant='ghost'
+                        disabled={false}
+                        onClick={toggleToolbar}    
+                    >
+                        <PiTextAa className='size-5' />
+                    </Button>
+                    </Hint>
+
+                    <Hint 
+                        label='Image'
+                    >
+                    <Button
+                        size='iconSm'
+                        variant='ghost'
+                        disabled={false}
+                        onClick={()=>{}}    
+                    >
+                        <ImageIcon className='size-5' />
+                    </Button>
+                    </Hint>
+                </div>
             </div>
 
         </div>
