@@ -2,6 +2,7 @@ import { AlertTriangle, HashIcon, Loader, MessageSquareTextIcon, SendHorizonalIc
 import { useParams } from 'react-router-dom';
 
 import SidebarItem from '@/components/atoms/sidebarItem/SidebarItem';
+import { UserItem } from '@/components/molecules/userItem/UserItem';
 import { WorkspacePanelSection } from '@/components/molecules/workspace/WorkspacePanelSection';
 import { useFetchWorkspaceDetailsById } from '@/hooks/apis/workspaces/useFetchWorkspaceDetailsById';
 import { useCreateChannelModal } from '@/hooks/context/useCreateChannelModal ';
@@ -12,7 +13,7 @@ const WorkspacePannel = () => {
     const {workspaceId} = useParams();
 
     const {isFetching, isSuccess, workspace} = useFetchWorkspaceDetailsById(workspaceId);
-
+    console.log('workspace', workspace);
     const {setOpenCreateChannelModal} = useCreateChannelModal();
 
 
@@ -59,6 +60,15 @@ const WorkspacePannel = () => {
                 {workspace?.channels?.map((channel) => {
                     return <SidebarItem key={channel._id} icon={HashIcon} label={channel.name} id={channel._id} />;
                 })}
+        </WorkspacePanelSection>
+
+        <WorkspacePanelSection
+          label={'Direct messages'}
+          onIconClick={()=>{}}
+          >
+            {workspace?.members?.map((item) => {
+                return <UserItem key={item?.memberId?._id} id={item?.memberId._id} image={item?.memberId?.avatar} label={item?.memberId?.username} />;
+            })}
         </WorkspacePanelSection>
     </div>
   );
