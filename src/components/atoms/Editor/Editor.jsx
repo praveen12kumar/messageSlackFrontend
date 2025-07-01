@@ -128,7 +128,9 @@ export const Editor = ({
                         size='sm'
                         className='ml-auto bg-[#007a6a] hover:bg-[#007a6a]/80 text-white transition-colors ease-in duration-200'
                         onClick={()=>{
-                            onSubmit({body: JSON.stringify(quillRef?.current?.getContents())});
+                            const messageContent = JSON.stringify(quillRef?.current?.getContents());
+                            onSubmit({body: messageContent});
+                            quillRef.current.setText('');
                         }}
                     >
                         <MdSend className='size-5' />

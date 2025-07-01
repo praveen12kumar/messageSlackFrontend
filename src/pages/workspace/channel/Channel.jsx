@@ -1,4 +1,5 @@
 import { TriangleAlertIcon } from 'lucide-react';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import Loader from '@/components/atoms/loader/Loader';
@@ -6,10 +7,20 @@ import Loader from '@/components/atoms/loader/Loader';
 import ChannelHeader from '@/components/molecules/channelHeader/ChannelHeader';
 import { ChatInput } from '@/components/molecules/chatInput/ChatInput';
 import { useGetChannelById } from '@/hooks/apis/channels/useGetChannelById';
+import { useSocket } from '@/hooks/context/useSocket';
 const Channel = () => {
     const {channelId} = useParams();
 
     const {isFetching, isError , channelDetails} = useGetChannelById(channelId);
+
+    const {joinChannel} = useSocket();
+
+    useEffect(()=>{
+          if(!isFetching && !isError){
+            joinChannel(channelId);
+          }
+        },[isFetching, isError, joinChannel, channelId]);
+
 
 
     if(isFetching){
@@ -26,6 +37,7 @@ const Channel = () => {
     
 
 
+        
 
 
   return (
