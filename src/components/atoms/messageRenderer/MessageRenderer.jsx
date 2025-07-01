@@ -2,8 +2,6 @@ import Quill from 'quill';
 import { useEffect, useRef, useState } from 'react';
 
 const MessageRenderer = ({value}) => {
-    console.log('value',value);
-
     const rendererRef = useRef(null);
     const [isEmpty, setIsEmpty] = useState(false);
 

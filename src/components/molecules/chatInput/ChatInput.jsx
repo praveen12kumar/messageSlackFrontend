@@ -12,6 +12,7 @@ export const ChatInput = () => {
     const {currentWorkspace} = useCurrentWorkspace();
 
     async function handleSubmit({body}) {
+        
         socket?.emit('NewMessage', {
             channelId: currentChannel,
             body,

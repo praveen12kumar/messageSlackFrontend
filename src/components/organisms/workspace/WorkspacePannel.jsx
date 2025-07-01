@@ -13,7 +13,7 @@ const WorkspacePannel = () => {
     const {workspaceId} = useParams();
 
     const {isFetching, isSuccess, workspace} = useFetchWorkspaceDetailsById(workspaceId);
-    console.log('workspace', workspace);
+    //console.log('workspace', workspace);
     const {setOpenCreateChannelModal} = useCreateChannelModal();
 
 
