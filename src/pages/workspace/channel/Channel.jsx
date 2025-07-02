@@ -12,8 +12,9 @@ import { useGetPaginatedMessages } from '@/hooks/apis/channels/useGetPaginatedMe
 import { useChannelMessage } from '@/hooks/context/useChannelMessage';
 import { useSocket } from '@/hooks/context/useSocket';
 
-const Channel = () => {
+const Channel = ()=> {
     const {channelId} = useParams();
+    
     const queryClient = useQueryClient();
     
     const {isFetching, isError , channelDetails} = useGetChannelById(channelId);
@@ -24,9 +25,7 @@ const Channel = () => {
     const { messages, isSuccess} = useGetPaginatedMessages(channelId);
     console.log('all Messages', messages);
     const messageContainerListRef = useRef(null);
-    console.log('messageList', messageList);
-
-
+    
     useEffect(() => {
         if(messageContainerListRef.current) {
             messageContainerListRef.current.scrollTop = messageContainerListRef.current.scrollHeight;
@@ -36,7 +35,7 @@ const Channel = () => {
     useEffect(()=>{
       console.log('channelId', channelId);
       queryClient.invalidateQueries(`fetchChannelById-${channelId}`);
-    },[channelId, queryClient]);
+    },[channelId]);
 
     useEffect(() => {
         if(!isFetching && !isError) {

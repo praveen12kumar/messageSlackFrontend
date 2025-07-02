@@ -1,9 +1,10 @@
+import MessageImangeThumbnail from '@/components/atoms/messageImageThumnail/MessageImangeThumbnail';
 import MessageRenderer from '@/components/atoms/messageRenderer/MessageRenderer';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 
 
-const Message = ({body, authorImage, authorName, createdAt, image=''}) => {
+const Message = ({body, authorImage, authorName, createdAt, image}) => {
     // console.log('body', body);
     // console.log('authorImage', authorImage);
     // console.log('authorName', authorName);
@@ -32,7 +33,7 @@ const Message = ({body, authorImage, authorName, createdAt, image=''}) => {
                     </button>
                 </div>
                 <MessageRenderer value={body}/>
-                {/* <Thumbnail/> */}
+                {image && <MessageImangeThumbnail url={image} />}
             </div>
         </div>
     </div>

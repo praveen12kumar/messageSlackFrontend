@@ -1,6 +1,6 @@
 import 'quill/dist/quill.core.css';
 
-import { ImageIcon } from 'lucide-react';
+import { ImageIcon, XIcon } from 'lucide-react';
 import Quill from 'quill';
 import { useEffect, useRef, useState } from 'react';
 import { MdSend } from 'react-icons/md';
@@ -9,6 +9,7 @@ import {PiTextAa} from 'react-icons/pi';
 import { Button } from '@/components/ui/button';
 
 import Hint from '../hint/Hint';
+
 
 export const Editor = ({
     //variant = 'create',
@@ -26,7 +27,8 @@ export const Editor = ({
     const defaultValueRef = useRef();
     const quillRef = useRef();
     const placeholderRef = useRef();
-
+    const [image, setImage] = useState(null);
+    const imageInputRef = useRef(null);
 
     function toggleToolbar() {
         setIsToolbarVisible(!isToolbarVisible);
@@ -91,7 +93,23 @@ export const Editor = ({
             <div className='flex flex-col border border-slate-300 rounded-md overflow-hidden focus-within:shadow-sm focus-within:border-slate-400 bg-white transition focus-within:'>
 
                 <div className='h-full ql-custom' ref={containerRef} />
-                
+                {
+                    image && (
+                        <div className="p-2">
+                            <div className="relative size-14 rounded-md overflow-hidden flex items-center justify-center group/image ">
+                                <button
+                                    onClick={()=>{setImage(null);
+                                    imageInputRef.current.value = '';
+                                    }
+                                    }
+                                    >
+                                    <XIcon className='absolute top-0 right-0 size-5 z-10 text-white bg-black/90 hover:bg-black/70 opacity-0 group-hover/image:opacity-100 transition-all duration-200 ease-in border-2 border-white rounded-full' />
+                                </button>
+                                <img src={URL.createObjectURL(image)} className="rounded-xl overflow-hidden object-cover" />
+                            </div>
+                        </div>
+                    )
+                }
                 <div className="flex px-2 pb-2 z-[5]">
                     <Hint 
                         label={isToolbarVisible ? 'Show toolbar' : 'Hide toolbar'}
@@ -115,11 +133,19 @@ export const Editor = ({
                         size='Sm'
                         variant='ghost'
                         disabled={false}
-                        onClick={()=>{}}    
+                        onClick={()=>{imageInputRef.current.click();}}    
                     >
                         <ImageIcon className='size-5' />
                     </Button>
                     </Hint>
+
+                    <input 
+                        type="file" 
+                        accept="image/*" 
+                        className='hidden' 
+                        ref={imageInputRef}
+                        onClick={(e)=>setImage(e.target.files[0])}
+                        />
 
                     <Hint 
                         label='Send Message'
@@ -129,9 +155,12 @@ export const Editor = ({
                         className='ml-auto bg-[#007a6a] hover:bg-[#007a6a]/80 text-white transition-colors ease-in duration-200'
                         onClick={()=>{
                             const messageContent = JSON.stringify(quillRef?.current?.getContents());
-                            onSubmit({body: messageContent});
-                            quillRef.current.setText('');
+                            onSubmit({body: messageContent, image});
+                            quillRef.current?.setText('');
+                            setImage(null);
+                            imageInputRef.current.value = '';
                         }}
+                        disabled={false}
                     >
                         <MdSend className='size-5' />
                     </Button>
