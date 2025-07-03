@@ -30,11 +30,11 @@ const Home = () => {
   },[isFetching, workspaces, navigate, setOpenCreateWorkspaceModal]);
 
   return (
-    <>
+    <div className='h-dvh w-full bg-slack'>
     <div>Home</div>
     <UserButton/>
 
-    </>
+    </div>
   );
 };
 
