@@ -20,7 +20,7 @@ const Home = () => {
         return;
     
     if(workspaces.length === 0 || !workspaces){
-      console.log('No workspaces found');
+      //console.log('No workspaces found');
       setOpenCreateWorkspaceModal(true);
     }
     else{

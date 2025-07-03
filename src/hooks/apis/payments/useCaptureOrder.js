@@ -7,11 +7,12 @@ export const useCaptureOrder = ()=>{
 
     const {auth} = useAuth();
     const {isPending, isSuccess, error, mutateAsync: captureOrderMutation} = useMutation({
-        mutationFn:({orderId, paymentId, status})=>capturePaymentRequest({
+        mutationFn:({orderId, paymentId, status, signature})=>capturePaymentRequest({
             orderId,
             paymentId,
             status,
-            token: auth?.token
+            token: auth?.token,
+            signature
         }),
         mutationKey: ['capturePayment'],
     });

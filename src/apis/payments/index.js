@@ -7,18 +7,19 @@ export const createOrderRequest = async({amount, token})=>{
                 'x-access-token': token
             }
         });
-        console.log('order response', response);
+        //console.log('order response', response);
         return response?.data?.data;
     } catch (error) {
+        // eslint-disable-next-line no-console
         console.log('Error in creating order', error);
 
     }
 };
 
-export const capturePaymentRequest = async ({orderId, paymentId, status, token})=>{
-    console.log('capture payment REQUEST', {orderId, paymentId, status});
+export const capturePaymentRequest = async ({orderId, paymentId, status, token, signature})=>{
+    //console.log('capture payment REQUEST', {orderId, paymentId, status});
     try {
-        const response = await axiosConfig.post('/payments/capture', {orderId, paymentId, status}, {
+        const response = await axiosConfig.post('/payments/capture', {orderId, paymentId, status, signature}, {
             headers: {
                 'x-access-token': token
             }
@@ -26,6 +27,7 @@ export const capturePaymentRequest = async ({orderId, paymentId, status, token})
         );
         return response?.data?.data;
     } catch (error) {
+        // eslint-disable-next-line no-console
         console.log('Error in capturing payment', error);
     }
 };

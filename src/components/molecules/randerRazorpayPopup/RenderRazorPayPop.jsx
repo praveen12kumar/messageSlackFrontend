@@ -9,11 +9,11 @@ const loadRazorPayScript = (src) => {
         const script = document.createElement('script');
         script.src = src;
         script.onload = ()=>{
-            console.log('razorpay script loaded successfully');
+            //console.log('razorpay script loaded successfully');
             resolve(true);
         };
         script.onerror = ()=>{
-            console.log('error in loading razorpay script');
+            //console.log('error in loading razorpay script');
             reject(false);
         };
         document.body.appendChild(script);
@@ -25,7 +25,7 @@ const RenderRazorPayPop = ({
 }) => {
 
 
-    console.log('RenderRazorPayPop orderId',orderId);
+    //console.log('RenderRazorPayPop orderId',orderId);
 
     const {captureOrderMutation} = useCaptureOrder();
 
@@ -33,13 +33,14 @@ const RenderRazorPayPop = ({
         const scriptResponse = await loadRazorPayScript('https://checkout.razorpay.com/v1/checkout.js');
 
         if(!scriptResponse){
-            console.log('razorpay script not loaded');
+            //console.log('razorpay script not loaded');
             return;
         };
 
         const rzp = new window.Razorpay(options);
 
         rzp.on('payment.failed', async (response)=>{
+            // eslint-disable-next-line no-console
             console.log('payment failed', response);
             await captureOrderMutation({
                 orderId: options.order_id,
@@ -58,14 +59,15 @@ const RenderRazorPayPop = ({
             key:keyId,
             amount,
             currency,
-            name:'SlackApp',
+            name:'Slack App',
             description:'Test transaction',
             order_id:orderId,
             handler: async(response)=>{
-                console.log('payment response',response);
+                //console.log('payment response',response);
                 await captureOrderMutation({
                     orderId:orderId,
                     paymentId:response.razorpay_payment_id,
+                    signature:response.razorpay_signature,
                     status:'success'
                 });
             },

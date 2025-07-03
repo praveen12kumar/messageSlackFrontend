@@ -37,7 +37,7 @@ export default [
       ],
       'semi': ['error', 'always'],
       'quotes': ['error', 'single'],
-      // 'no-console': 'warn',
+      'no-console': 'warn',
       'react/prop-types': 'off',
       'simple-import-sort/imports': 'error',
       'simple-import-sort/exports': 'error',

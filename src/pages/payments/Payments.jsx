@@ -11,7 +11,7 @@ export const Payments = () => {
     async function handleFormSubmit(e) {
         e.preventDefault();
             const response = await createOrderMutation(amount);
-            console.log('order response in Payment', response.id);
+            //console.log('order response in Payment', response.id);
             setOrderResponse(response);
         }
 
